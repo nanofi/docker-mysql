@@ -7,6 +7,12 @@ if [ ! -d '/var/lib/mysql/mysql' -a "${1%_safe}" = 'mysqld' ]; then
 		echo >&2 '  Did you forget to add -e MYSQL_ROOT_PASSWORD=... ?'
 		exit 1
 	fi
+
+  mkdir -p -m 700 /var/lib/mysql
+  chown -R mysql:mysql /var/lib/mysql
+
+  mkdir -p -m 0755 /run/mysqld
+  chown -R mysql:root /run/mysqld
 	
 	mysql_install_db --user=mysql --datadir=/var/lib/mysql
 	
