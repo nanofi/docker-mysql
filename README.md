@@ -9,7 +9,7 @@ A Dockerfile that installs a mysql server with multiple databases. databases and
 ## Usage
 To run it:
 ```
-$ docker run -d -v /var/run/docker.sock:/var/run/docker.sock nanofi/mysql
+$ docker run -d -v /var/run/docker.sock:/var/run/docker.sock -e MYSQL_ROOT_PASSWORD="password" nanofi/mysql
 ```
 Start any containers with env vars:
 - `DB_NAME`; database name
