@@ -1,10 +1,20 @@
 docker-mysql
 ============
 
-A Dockerfile that installs a mysql server with multiple databases.
+[![Build Status](https://travis-ci.org/nanofi/docker-mysql.svg?branch=master)](https://travis-ci.org/nanofi/docker-mysql)
+
+A Dockerfile that installs a mysql server with multiple databases. databases and users will generate dynamically with starting or stopping or killing a container.
 
 
-## Formatss of Parameters
+## Usage
+To run it:
+```
+$ docker run -d -v /var/run/docker.sock:/var/run/docker.sock nanofi/mysql
+```
+Start any containers with env vars:
+- `DB_NAME`; database name
+- `DB_USER`; username 
+- `DB_PASS`; password
 
-- `MYSQL_DATABASES=database1,database2,...,databaseN`
-- `MYSQL_USERS=user1:pass1:database1/database3,user2:pass2:database2/database6,...`
+If `DB_NAME` presences, the container creates a database. If `DB_NAME`, `DB_USER` and `DB_PASS` presence, the container creates an user which has all privilege to the database.
+

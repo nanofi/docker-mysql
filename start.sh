@@ -20,28 +20,6 @@ if [ ! -d '/var/lib/mysql/mysql' -a "${1%_safe}" = 'mysqld' ]; then
 		GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 		DROP DATABASE IF EXISTS test ;
 	EOSQL
-
-	if [ "$MYSQL_DATABASES" ]; then
-    for DATABASE in $(echo $MYSQL_DATABASES | sed 's/,/ /g'); do
-      echo "CREATE DATABASE IF NOT EXISTS $DATABASE ;" >> "$TEMP_FILE"
-    done
-	fi
-	
-	if [ "$MYSQL_USERS" ]; then
-    for USER in $(echo $MYSQL_USERS | sed 's/,/ /g'); do
-      ARRY=($(echo $USER | sed 's/:/ /g'))
-      NAME=${ARRY[0]}
-      PASS=${ARRY[1]}
-      GRANTS="${ARRY[2]}"
-		  echo "CREATE USER '$NAME'@'%' IDENTIFIED BY '$PASS' ;" >> "$TEMP_FILE"
-
-      if [ "$GRANTS" ]; then
-        for GRANT in $(echo $GRANTS | sed 's/\// /g'); do
-          echo "GRANT ALL ON $GRANT.* TO '$NAME'@'%' ;" >> "$TEMP_FILE"
-        done
-      fi
-    done
-	fi
 	
 	echo 'FLUSH PRIVILEGES ;' >> "$TEMP_FILE"
 	

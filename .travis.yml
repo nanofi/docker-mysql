@@ -1,0 +1,24 @@
+language: go
+go:
+  - 1.4
+install:
+  - make deps
+script:
+  - make test
+before_deploy:
+  - make tool
+  - make release
+deploy:
+  provider: releases
+  api_key:
+    secure: i4LFQ1kyX97abC925LrvK4rVO7zzaaqsZzWBCHSjxUBunKVtTe7jc8XHHG0Mh2qJfdog+sCh57+AmZsDy3B6fw3ZSrpFJh2miHPRWWdpfjCEVqQFHzQrfVm7hfqSYg+p7n4yxyY0FCNZ7T6/fNef/W8TUdvhc/RyZvgZ9eqePJw=
+  skip_cleanup: true
+  file:
+    - docker-mysql-linux-386-0.1.0.tar.gz
+    - docker-mysql-linux-amd64-0.1.0.tar.gz
+    - docker-mysql-linux-arm-0.1.0.tar.gz
+    - docker-mysql-darwin-386-0.1.0.tar.gz
+    - docker-mysql-darwin-amd64-0.1.0.tar.gz
+  on:
+    tags: true
+    all_branches: true

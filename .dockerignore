@@ -1,0 +1,6 @@
+.git
+README.md
+LICENSE
+Makefile
+GLOCKFILE
+*.go
