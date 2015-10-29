@@ -52,14 +52,14 @@ func update(client *docker.Client) {
 		log.Fatalf("unable to create temp file: %s\n", err)
 	}
 	for _, container := range containers {
-		if val, ok := container.Env["DB_NAME"]; ok {
+		if val, ok := container.Env["MYSQL_DB_NAME"]; ok {
 			fmt.Fprintf(dest, "CREATE DATABASE IF NOT EXISTS %s ;\n", val)
 		}
 	}
 	for _, container := range containers {
-		user, okUser := container.Env["DB_USER"]
-		pass, okPass := container.Env["DB_PASS"]
-		db, okDb := container.Env["DB_NAME"]
+		user, okUser := container.Env["MYSQL_DB_USER"]
+		pass, okPass := container.Env["MYSQL_DB_PASS"]
+		db, okDb := container.Env["MYSQL_DB_NAME"]
 		address := container.Address
 		if okUser && okPass && okDb {
 			fmt.Fprintf(dest, "GRANT ALL ON %s.* TO '%s'@'%s' identified by '%s' ;\n", db, user, address, pass)
