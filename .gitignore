@@ -1,2 +1,6 @@
 
 docker-mysql
+dist/
+*.tar.gz
+vendor/
+glide

@@ -11,7 +11,7 @@ RUN \
   wget -P /usr/local/bin https://godist.herokuapp.com/projects/ddollar/forego/releases/current/linux-amd64/forego && \
   chmod u+x /usr/local/bin/forego
 
-ENV CONTAINER_VERSION 0.1.0
+ENV CONTAINER_VERSION 0.2.0
 RUN \
   wget https://github.com/nanofi/docker-mysql/releases/download/$CONTAINER_VERSION/docker-mysql-linux-amd64-$CONTAINER_VERSION.tar.gz && \
   tar -xvzf docker-mysql-linux-amd64-$CONTAINER_VERSION.tar.gz && \
