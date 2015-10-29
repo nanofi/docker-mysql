@@ -8,7 +8,7 @@ if [ ! -d '/var/lib/mysql/mysql' -a "${1%_safe}" = 'mysqld' ]; then
 		exit 1
 	fi
 
-	mysql_install_db --user=mysql --datadir=/var/lib/mysql
+	mysqld --initialize --user=mysql --datadir=/var/lib/mysql
 	
 	# These statements _must_ be on individual lines, and _must_ end with
 	# semicolons (no line breaks or comments are permitted).
@@ -24,6 +24,7 @@ if [ ! -d '/var/lib/mysql/mysql' -a "${1%_safe}" = 'mysqld' ]; then
 	echo 'FLUSH PRIVILEGES ;' >> "$TEMP_FILE"
 	
 	set -- "$@" --init-file="$TEMP_FILE"
+  ls -al /var/run/mysqld > /var/lib/mysql/ls-mydqld
 fi
 
 chown -R mysql:mysql /var/lib/mysql

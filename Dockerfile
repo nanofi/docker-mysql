@@ -18,11 +18,8 @@ RUN \
   mv dist/docker-mysql-linux-amd64 /usr/local/bin/docker-mysql && \
   rm -rf dist
 
-RUN usermod -u 1000 mysql
-
 COPY . /app/
 WORKDIR /app/
 
 ENTRYPOINT []
-CMD ["mysqld_safe", "--datadir=/var/lib/mysql", "--user=mysql"]
 CMD ["forego", "start", "-r"]
